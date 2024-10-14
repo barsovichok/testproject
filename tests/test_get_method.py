@@ -1,6 +1,10 @@
 from http import HTTPStatus
 
-from models.Posts import Post
+import dotenv
+
+from Posts import Post
+
+dotenv.load_dotenv()
 
 
 def test_status_code(base_response):

@@ -28,21 +28,21 @@ jobs:
       - name: Allure Results
         if: always()
         run: |
-          pytest --alluredir=allure-results  # Запуск тестов и сохранение результатов Allure
+          pytest --alluredir=allure-results
       - name: Download Allure
         run: |
             sudo apt-add-repository ppa:qameta/allure -y
             sudo apt-get update
             sudo apt-get install allure -y
 
-    # Генерируем HTML отчет
       - name: Generate Allure report
         run: allure generate allure-results --clean -o allure-report
 
-    # Загружаем отчет как артефакт GitHub Actions
-      - name: Upload Allure report
-        uses: actions/upload-artifact@v3
+
+      - name: Deploy Allure report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          name: allure-report
-          path: allure-report
+          github_token: ${{ secrets.TOKEN }}
+          publish_dir: ./allure-report
+
 
