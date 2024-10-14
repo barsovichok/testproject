@@ -1,0 +1,48 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tests:
+    name: Test App
+    runs-on:  ubuntu-latest
+    env:
+      BASE_URL: ${{secrets.BASE_URL}}
+      DEFAULT_POSTS_RETURN: ${{secrets.DEFAULT_POSTS_RETURN}}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip' # caching pip dependencies
+      - run: pip install --upgrade -r requirements.txt
+      - run: pytest tests --junit-xml=test-results.xml
+        env:
+          BASE_URL: ${{secrets.BASE_URL}}
+          DEFAULT_POSTS_RETURN: ${{secrets.DEFAULT_POSTS_RETURN}}
+
+      - name: Allure Results
+        if: always()
+        run: |
+          pytest --alluredir=allure-results  # Запуск тестов и сохранение результатов Allure
+      - name: Download Allure
+        run: |
+            sudo apt-add-repository ppa:qameta/allure -y
+            sudo apt-get update
+            sudo apt-get install allure -y
+
+    # Генерируем HTML отчет
+      - name: Generate Allure report
+        run: allure generate allure-results --clean -o allure-report
+
+    # Загружаем отчет как артефакт GitHub Actions
+      - name: Upload Allure report
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-report
+          path: allure-report
+
