@@ -1,0 +1,8 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Tue Oct 15 08:46:07 UTC 2024","Tue Oct 15 08:46:07 UTC 2024","1","tests","test_get_method","","","","test_unique_ids","Checks that all ids are unique"
+"passed","Tue Oct 15 08:46:07 UTC 2024","Tue Oct 15 08:46:07 UTC 2024","0","tests","test_get_method","","","","test_header_value","Checks that headers are valid"
+"failed","Tue Oct 15 08:46:07 UTC 2024","Tue Oct 15 08:46:07 UTC 2024","0","tests","test_get_method","","","","test_posts_amount","Checks that posts amount is the same as the total_posts"
+"passed","Tue Oct 15 08:46:07 UTC 2024","Tue Oct 15 08:46:07 UTC 2024","0","tests","test_get_method","","","","test_field_validation","Checks that all fields are valid"
+"passed","Tue Oct 15 08:46:07 UTC 2024","Tue Oct 15 08:46:07 UTC 2024","0","tests","test_get_method","","","","test_response_headers","Checks that response headers are present"
+"passed","Tue Oct 15 08:46:07 UTC 2024","Tue Oct 15 08:46:07 UTC 2024","0","tests","test_get_method","","","","test_status_code","Checks that response status code is OK"
+"passed","Tue Oct 15 08:46:07 UTC 2024","Tue Oct 15 08:46:07 UTC 2024","0","tests","test_get_method","","","","test_json_format","Checks that response status code is OK"
