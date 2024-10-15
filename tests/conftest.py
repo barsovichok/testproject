@@ -17,9 +17,22 @@ def base_url():
 
 
 @pytest.fixture(scope="session")
-def base_response(base_url):
+def last_response_date(base_url):
+    response = requests.get(f"{base_url}/posts")
+    return response.headers['Date']
+
+
+@pytest.fixture(scope="session")
+def base_response(base_url, last_response_date):
     """Returns response from base url"""
-    return requests.get(f"{base_url}/posts")
+    headers = {
+        'If-None-Match': 'W/"6b80-Ybsq/K6GwwqrYkAsFxqDXGC7Do0',
+        'If-Modified-Since': last_response_date,
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
+                      ' AppleWebKit/537.36 (KHTML, like Gecko) '
+                      'Chrome/58.0.3029.110 Safari/537.3',
+    }
+    return requests.get(f"{base_url}/posts", headers=headers)
 
 
 @pytest.fixture(scope="session")
